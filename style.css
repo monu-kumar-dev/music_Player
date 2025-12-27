@@ -1,126 +1,179 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
-body {
-  background-color: antiquewhite;
-}
-
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  font-weight: bolder;
-  font-size: 1.3rem;
+body {
+  background: #121212;
+  color: white;
+  font-family: "Varela Round", sans-serif;
 }
 
-.brand img {
-  width: 30px;
-  padding: 0 8px;
-}
-
+/* NAVBAR */
 nav {
-  font-family: "Ubuntu", "sans-serif";
+  background: black;
+  padding: 10px 20px;
 }
 
 nav ul {
   display: flex;
   align-items: center;
-  list-style-type: none;
-  height: 65px;
-  background-color: black;
-  color: white;
+  list-style: none;
 }
 
 nav ul li {
-  padding: 0px 10px;
+  margin-right: 20px;
+  cursor: pointer;
 }
 
-.container {
-  min-height: 65vh;
-  background-color: black;
-  color: white;
-  font-family: "Varela Round", sans-serif;
+.brand {
   display: flex;
-  margin: 23px auto;
-  width: 70%;
-  background-image: url(./bg.jpg);
-  background-size: cover;
-}
-
-.songList h1 {
-  margin: 10px 20px;
+  align-items: center;
+  font-weight: bold;
   font-size: 1.3rem;
 }
 
+.brand img {
+  width: 30px;
+  margin-right: 8px;
+}
+
+/* MAIN CONTAINER */
+.container {
+  width: 80%;
+  margin: 30px auto;
+  min-height: 70vh;
+  border-radius: 20px;
+  background: url("./bg.jpg") no-repeat center/cover;
+  display: flex;
+  padding: 20px;
+}
+
+/* SONG LIST (LEFT SIDE FIXED) */
+.songList {
+  width: 38%;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.songList h1 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+/* SONG ITEM */
+.songItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: black;
+  border-radius: 30px;
+  padding: 8px 15px;
+  margin-bottom: 12px;
+  animation: slideUp 0.6s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.songItem:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.songItem img {
+  width: 42px;
+  border-radius: 50%;
+}
+
+.songName {
+  flex: 1;
+  margin-left: 15px;
+  font-weight: 600;
+}
+
+/* PLAY ICON + TIME */
+.songlistplay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeStamp {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.songItemPlay {
+  cursor: pointer;
+  color: #1db954;
+  transition: transform 0.2s ease;
+}
+
+.songItemPlay:hover {
+  transform: scale(1.3);
+}
+
+/* BOTTOM PLAYER */
 .bottom {
   position: sticky;
-  height: 100px;
-  background-color: black;
-  color: white;
-  bottom: 0; /* not work so giving container height*/
+  bottom: 0;
+  background: black;
+  padding: 15px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 }
 
 #myProgressBar {
-  width: 80vw;
+  width: 85%;
   cursor: pointer;
 }
 
 .icons {
-  margin-top: 30px;
-}
-
-.icons i {
-  width: 50px;
-  height: 20px;
-}
-
-.songItemContainer {
-  margin-top: 30px;
-}
-
-.songItem {
-  height: 50px;
+  margin-top: 10px;
   display: flex;
-  /* width: 80%; */
-  background-color: white;
-  align-items: center;
-  justify-content: space-between;
-  color: black;
-  border-radius: 20px;
-  margin: 8px 20px;
-}
-
-.songItem img {
-  width: 43px;
-  border-radius: 30px;
-  margin-left: 10px;
-}
-.timeStamp {
-  padding: 0px 16px;
-}
-
-.timeStamp i {
-  cursor: pointer;
+  gap: 30px;
 }
 
 .icons i {
+  font-size: 1.4rem;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
+.icons i:hover {
+  transform: scale(1.2);
+  color: #1db954;
+}
+
+/* SONG INFO */
 .songInfo {
   position: absolute;
-  left: 10vw;
-  font-family: "Varela Round", sans-serif;
+  left: 8%;
+  bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
 .songInfo img {
   opacity: 0;
-  transition: opacity 0.4s ease-in;
+  transition: opacity 0.3s ease-in;
+}
+
+/* ANIMATION */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

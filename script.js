@@ -124,18 +124,33 @@ const makeAllPlays = () => {
 
 Array.from(songItemPlay).forEach((element) => {
   element.addEventListener("click", (e) => {
-    makeAllPlays();
-    e.target.classList.remove("fa-play");
-    e.target.classList.add("fa-pause");
-    songIndex = parseInt(e.target.id);
-    audioElement.src = `./songs/${songIndex}.mp3`;
-    audioElement.currentTime = 0;
-    audioElement.play();
+    const clickedIndex = parseInt(e.target.id);
 
-    // pahle wale ko pause
-    masterPlay.classList.remove("fa-play");
-    masterPlay.classList.add("fa-pause");
-    gif.style.opacity = 1;
+    // SAME SONG → TOGGLE PLAY / PAUSE
+    if (songIndex === clickedIndex && !audioElement.paused) {
+      audioElement.pause();
+      e.target.classList.remove("fa-pause");
+      e.target.classList.add("fa-play");
+      masterPlay.classList.remove("fa-pause");
+      masterPlay.classList.add("fa-play");
+      gif.style.opacity = 0;
+    }
+    //  NEW SONG OR PAUSED SONG
+    else {
+      makeAllPlays();
+      songIndex = clickedIndex;
+      audioElement.src = `./songs/${songIndex}.mp3`;
+      audioElement.currentTime = 0;
+      audioElement.play();
+
+      e.target.classList.remove("fa-play");
+      e.target.classList.add("fa-pause");
+
+      masterPlay.classList.remove("fa-play");
+      masterPlay.classList.add("fa-pause");
+      gif.style.opacity = 1;
+      songInfoName.innerText = songs[songIndex - 1].songname;
+    }
   });
 });
 
@@ -147,6 +162,7 @@ forward.addEventListener("click", (e) => {
   }
 
   audioElement.src = `./songs/${songIndex}.mp3`;
+  songInfoName.innerText = songs[songIndex - 1].songname;
   audioElement.currentTime = 0;
   audioElement.play();
   masterPlay.classList.remove("fa-play");
@@ -162,6 +178,7 @@ backward.addEventListener("click", (e) => {
   }
 
   audioElement.src = `./songs/${songIndex}.mp3`;
+  songInfoName.innerText = songs[songIndex - 1].songname;
   audioElement.currentTime = 0;
   audioElement.play();
   masterPlay.classList.remove("fa-play");
