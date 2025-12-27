@@ -177,3 +177,87 @@ nav ul li {
     transform: translateY(0);
   }
 }
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+/* -------- TABLETS (max-width: 1024px) -------- */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+
+  .songList {
+    width: 45%;
+  }
+
+  .songName {
+    font-size: 0.95rem;
+  }
+}
+
+/* -------- MOBILE DEVICES (max-width: 768px) -------- */
+@media (max-width: 768px) {
+  nav ul li:not(.brand) {
+    display: none; /* hide Home, About */
+  }
+
+  .container {
+    flex-direction: column;
+    width: 95%;
+    padding: 15px;
+  }
+
+  .songList {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .songItem {
+    padding: 8px 12px;
+  }
+
+  .songName {
+    font-size: 0.9rem;
+  }
+
+  .timeStamp {
+    font-size: 0.8rem;
+  }
+
+  .icons {
+    gap: 20px;
+  }
+
+  .icons i {
+    font-size: 1.2rem;
+  }
+
+  .songInfo {
+    position: static;
+    margin-top: 8px;
+  }
+}
+
+/* -------- SMALL MOBILES (max-width: 480px) -------- */
+@media (max-width: 480px) {
+  .songList h1 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .songItem img {
+    width: 36px;
+  }
+
+  .songName {
+    font-size: 0.85rem;
+  }
+
+  #myProgressBar {
+    width: 90%;
+  }
+
+  .icons i {
+    font-size: 1.1rem;
+  }
+}
