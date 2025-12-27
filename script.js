@@ -6,59 +6,80 @@ let audioElement = new Audio("./songs/1.mp3");
 let masterPlay = document.getElementById("masterPlay");
 let myProgressbar = document.getElementById("myProgressBar");
 let gif = document.getElementById("gif");
+let songItems = document.getElementsByClassName("songItem");
+let songItemPlay = document.getElementsByClassName("songItemPlay");
+let backward = document.getElementById("backward");
+let forward = document.getElementById("forward");
 
 let songs = [
   {
-    songname: "Dil Se",
+    songname: "Let Me Love You",
     filePath: "./songs/1.mp3",
     coverpath: "covers/1.jpg",
+    timeStamp: "02:43",
   },
   {
     songname: "Tum Hi Ho",
     filePath: "./songs/2.mp3",
     coverpath: "covers/2.jpg",
+    timeStamp: "04:22",
   },
   {
     songname: "Raabta",
     filePath: "./songs/3.mp3",
     coverpath: "covers/3.jpg",
+    timeStamp: "03:50",
   },
   {
     songname: "Kesariya",
     filePath: "./songs/4.mp3",
     coverpath: "covers/4.jpg",
+    timeStamp: "04:28",
   },
   {
     songname: "Apna Bana Le",
     filePath: "./songs/5.mp3",
     coverpath: "covers/5.jpg",
+    timeStamp: "03:24",
   },
   {
     songname: "Khairiyat",
     filePath: "./songs/6.mp3",
     coverpath: "covers/6.jpg",
+    timeStamp: "04:41",
   },
   {
     songname: "Agar Tum Saath Ho",
     filePath: "./songs/7.mp3",
     coverpath: "covers/7.jpg",
+    timeStamp: "05:41",
   },
   {
-    songname: "Shayad",
+    songname: "Aaj kl",
     filePath: "./songs/8.mp3",
     coverpath: "covers/8.jpg",
+    timeStamp: "04:08",
   },
   {
-    songname: "Jeene Laga Hoon",
+    songname: "Lollipop",
     filePath: "./songs/9.mp3",
     coverpath: "covers/9.jpg",
+    timeStamp: "03:58",
   },
   {
-    songname: "Tera Ban Jaunga",
+    songname: "Bekhali",
     filePath: "./songs/10.mp3",
     coverpath: "covers/10.jpg",
+    timeStamp: "03:56",
   },
 ];
+
+Array.from(songItems).forEach((element, i) => {
+  console.log(element, i);
+  element.getElementsByTagName("img")[0].src = songs[i].coverpath;
+  element.getElementsByClassName("songName")[0].innerText = songs[i].songname;
+  element.getElementsByClassName("timeStamp")[0].innerText = songs[i].timeStamp;
+});
 
 // audioElement.play();
 
@@ -92,4 +113,58 @@ audioElement.addEventListener("timeupdate", () => {
 myProgressbar.addEventListener("change", () => {
   audioElement.currentTime =
     (myProgressbar.value * audioElement.duration) / 100;
+});
+
+const makeAllPlays = () => {
+  Array.from(songItemPlay).forEach((element) => {
+    element.classList.add("fa-play");
+    element.classList.remove("fa-pause");
+  });
+};
+
+Array.from(songItemPlay).forEach((element) => {
+  element.addEventListener("click", (e) => {
+    makeAllPlays();
+    e.target.classList.remove("fa-play");
+    e.target.classList.add("fa-pause");
+    songIndex = parseInt(e.target.id);
+    audioElement.src = `./songs/${songIndex}.mp3`;
+    audioElement.currentTime = 0;
+    audioElement.play();
+
+    // pahle wale ko pause
+    masterPlay.classList.remove("fa-play");
+    masterPlay.classList.add("fa-pause");
+    gif.style.opacity = 1;
+  });
+});
+
+forward.addEventListener("click", (e) => {
+  if (songIndex > 10) {
+    songIndex = 0;
+  } else {
+    songIndex += 1;
+  }
+
+  audioElement.src = `./songs/${songIndex}.mp3`;
+  audioElement.currentTime = 0;
+  audioElement.play();
+  masterPlay.classList.remove("fa-play");
+  masterPlay.classList.add("fa-pause");
+  gif.style.opacity = 1;
+});
+
+backward.addEventListener("click", (e) => {
+  if (songIndex <= 0) {
+    songIndex = 0;
+  } else {
+    songIndex -= 1;
+  }
+
+  audioElement.src = `./songs/${songIndex}.mp3`;
+  audioElement.currentTime = 0;
+  audioElement.play();
+  masterPlay.classList.remove("fa-play");
+  masterPlay.classList.add("fa-pause");
+  gif.style.opacity = 1;
 });
